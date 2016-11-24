@@ -15,16 +15,14 @@ void main()
 {
   int s=0;
   char t[20];
-  int i=0; int j;
 lecture(t);
-  while ( strcmpr(*(t+i),"fin")) && (strlen(*(t+i))<20 ))
-  {
-  i++;
-  lecture(t+i);
- }
- for (j=0;j<i;j++)
+  while ( strcmpr((t),"fin"))
+{
+  if (sterln(t)<20)
+ if (comparaison(t))
  {
- if comparaison((t+j))
 s += 1;
+}
+lecture(t);
 }
 }
