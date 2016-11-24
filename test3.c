@@ -16,7 +16,7 @@ void main()
   char t[20];
   int i=0; int j;
 lecture(t);
-  while ( strcmpr(*(t+i),"fin")) and (strlen(*(t+i))<20 ))
+  while ( strcmpr(*(t+i),"fin")) && (strlen(*(t+i))<20 ))
   {
   i++;
   lecture(t+i);
