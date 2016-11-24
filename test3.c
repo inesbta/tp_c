@@ -13,6 +13,7 @@ int comparaison(char *s)
 }
 void main()
 {
+  int s=0;
   char t[20];
   int i=0; int j;
 lecture(t);
@@ -24,8 +25,6 @@ lecture(t);
  for (j=0;j<i;j++)
  {
  if comparaison((t+j))
- {
- printf(*(t+j));
-}
+s += 1;
 }
 }
