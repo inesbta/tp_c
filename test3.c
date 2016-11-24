@@ -16,7 +16,7 @@ void main()
   int s=0;
   char t[20];
 lecture(t);
-  while ( strcmpr((t),"fin"))
+  while ( strcmpr(t,"fin"))
 {
   if (sterln(t)<20)
  if (comparaison(t))
