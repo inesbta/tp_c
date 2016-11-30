@@ -6,9 +6,11 @@ void lecture(char * s)
   scanf("%s",s);
 }
 int comparaison(char *s)
-{ int v;
-  if (strlen(s) > 10);
+{ int v=0;
+  if (strlen(s) > 4)
+  {
   v=1;
+}
   return(v);
 }
 void main()
@@ -16,13 +18,16 @@ void main()
   int s=0;
   char t[20];
 lecture(t);
-  while ( strcmpr(t,"fin"))
+  while ( strcmp(t,"fin"))
 {
-  if (sterln(t)<20)
- if (comparaison(t))
+/* if (strlen(t)<20)*/
+
+ if (comparaison(t)==1)
  {
-s += 1;
-}
+ s ++;
+ }
+
 lecture(t);
-}
-}
+ }
+ printf("%d \n",s);
+ }
