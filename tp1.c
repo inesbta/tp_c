@@ -19,12 +19,12 @@ void sgrep(char *s,int argc,char* argv[],int nb_ligne)
   void main(int argc,char* argv[])
   {
     int nb=1; FILE* fof; FILE* fp; char lin[100]; char ligne[500];char fichier[100];
-    if (argc < 3)
+    if (argc < 2)
     {
       printf("nombre de parametres insuffisant");
       exit(0);
     }
-    system("ls /home/ines/argv[1] > fof.txt");
+    system("ls /home/ines/argv[0] > fof.txt");
     fof=fopen("fof.txt","r");
     while(fgets(lin,100,fof)) {
     memcpy(fichier,lin,strlen(lin)-1);
