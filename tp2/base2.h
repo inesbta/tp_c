@@ -6,11 +6,12 @@ struct produit
   int code[5];
   char desig[31];
   char famille[31];
-  float cout_achat[11];
-  long quantit_stock[11];
+  float cout_achat;
+  long quantit_stock;
   struct produit * nextp;
 };
 typedef struct produit PRODUIT;
+
 struct famille
 {
   char designation[30];
@@ -20,8 +21,14 @@ typedef struct famille FAMILLE;
 
 PRODUIT * load_produit()
 {
-  PRODUIT ** firstp;PRODUIT * pp; FILE * fp;char s[100];PRODUIT * nextp;
+  PRODUIT ** firstp;
+  PRODUIT * pp;
+  FILE * fp;
+  char s[100];
+  PRODUIT * nextp;
+
   fp=fopen("produit.txt","r");
+
   if(fp)
   {
    while(fgets(s,100,fp))
@@ -40,7 +47,8 @@ PRODUIT * load_produit()
   }
   else
 
-  printf("erreur");
+   printf("erreur");
+
   fclose(fp);
 }
 
@@ -102,13 +110,13 @@ void stock_global(PRODUIT* firstp)
     printf("%30s|",pp->famille);
     printf("%10f|",pp->cout_achat);
     printf("%10ld|",pp->quantit_stock);
-    total = total+pp->quantit_stock
+    total = total+pp->quantit_stock;
   }
   printf("%ld\n",total);
 }
 void stock_famille(PRODUIT * firstp,char fam[30])
 {
-   long total; PRODUIT * pp;
+   long total=0; PRODUIT * pp;
 
   fn_entet();
   printf("==================ETAT DU STOCK DE LA FAMILLE %s===================",fam);
@@ -120,8 +128,8 @@ void stock_famille(PRODUIT * firstp,char fam[30])
   printf("%10f",pp->cout_achat);
   printf("%10ld",pp->quantit_stock);
   total=total+pp->quantit_stock;
-}
-printf("%ld\n",total);
+  printf("%ld \n",total);
+}  
 void recap_famille(PRODUIT * firstp)
 {
   PRODUIT * pp; float val;
@@ -131,7 +139,7 @@ void recap_famille(PRODUIT * firstp)
   for(pp=firstp;pp;pp=pp->nextp )
   {
     printf("%30s|",pp->famille);
-    val = pp->cout_achat * pp->quantit_stock;
+    val =(float)  ((pp->cout_achat) * (pp->quantit_stock));
     printf("%f",val);
   }
 }
@@ -172,7 +180,8 @@ void supprime_famille(FAMILLE * firstf,char fam[30])
         firstf=firstf->nextf;
         q=p;
         free(q);
-    else
+      }
+    else{
     prev->nextf=p->nextf;
     free(p);
       }
