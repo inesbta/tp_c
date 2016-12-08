@@ -1,0 +1,30 @@
+#include <string.h>
+
+
+
+void delete-productF(produit* root, char fam[])
+{
+  produit* p,q,prev;
+  for(p=root; p != NULL;prev=p, p=p->nextp )
+  {
+    if (strcmp(p->famille,fam) == 0)
+    {
+      if(p == root)
+      {
+        root = root-> nextp ;
+        q=p;
+        free(q);
+      }
+      else
+      {
+        delete_node(p, prev);
+      }
+    }
+  }
+
+}
+void delete_node(poduit * p, produit * prev)
+{
+  prev->nextp = p->nextp;
+  free(p);
+}
