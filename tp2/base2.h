@@ -51,12 +51,13 @@ PRODUIT * load_produit()
 
   fclose(fp);
 }
-/*
+
 
  FAMILLE * load_famille()
 {
  FAMILLE **firstf;FAMILLE * pf; char s1[100];FILE * fp1; FAMILLE * nextf;
   fp1=fopen("famille.txt","r");
+  printf("hello");
   if(fp1)
   {
     while(fgets(s1,100,fp1))
@@ -73,7 +74,7 @@ PRODUIT * load_produit()
   printf("erreur");
 fclose(fp1);
 }
-void fn_entet()
+ void fn_entet()
 {
   char * entet; char s2[200]; FILE * fp2;
   fp2=fopen("entet.txt","r");
@@ -187,4 +188,4 @@ void supprime_famille(FAMILLE * firstf,char fam[30])
       }
     }
   }
-}*/
+}
