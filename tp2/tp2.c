@@ -7,7 +7,7 @@ void main()
   char fam[30];
 
   first_produit=load_produit();
-/ first_famille=load_famille();
+  first_famille=load_famille();
 
   while(choix=get_choix())
   {

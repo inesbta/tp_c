@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<string.h>
 #include <stdlib.h>
-printf("hi");
 struct produit
 {
   int code;
@@ -34,7 +33,6 @@ PRODUIT * load_produit()
   {
     while(fgets(s,100,fp))
     {
-      printf("hello" );
       pp=(PRODUIT*)malloc(sizeof(PRODUIT));
       sscanf(s,"%4d%30s%30s%10f%10ld",&(pp->code),(pp->desig),(pp->famille),&(pp->cout_achat),&(pp->quantit_stock));
     /*  strncpy(pp->code,s,4);
@@ -45,7 +43,6 @@ PRODUIT * load_produit()
       pp->nextp= *firstp;
       *firstp =pp;
       return(*firstp);
-      printf("ines");
     }
   }
   else
@@ -56,7 +53,7 @@ PRODUIT * load_produit()
 }
 
 
-/* FAMILLE * load_famille()
+ FAMILLE * load_famille()
 {
  FAMILLE **firstf;FAMILLE * pf; char s1[100];FILE * fp1; FAMILLE * nextf;
   fp1=fopen("famille.txt","r");
@@ -190,4 +187,4 @@ void supprime_famille(FAMILLE * firstf,char fam[30])
       }
     }
   }
-}*/
+}
