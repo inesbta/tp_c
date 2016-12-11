@@ -35,15 +35,10 @@ PRODUIT * load_produit()
     {
       pp=(PRODUIT*)malloc(sizeof(PRODUIT));
       sscanf(s,"%4d%30s%30s%10f%10ld",&(pp->code),(pp->desig),(pp->famille),&(pp->cout_achat),&(pp->quantit_stock));
-/*      strncpy(pp->code,s,4);
-      strncpy(pp->desig,s+4,30);
-      strncpy(pp->famille,s+34,30);
-      strncpy(pp->cout_achat,s+64,10);
-      strncpy(pp->quantit_stock,s+74,10);
-      pp->nextp= *firstp;
-      *firstp =pp;
-      return(*firstp);*/
+      pp->nextp= * firstp;
+      *firstp = pp;
     }
+      return(*firstp);
   }
   else
 
@@ -67,8 +62,8 @@ PRODUIT * load_produit()
       sscanf(s1,"%s",pf->designation);
       pf->nextf=*firstf;
       *firstf=pf;
-      return(*firstf);
     }
+    return(*firstf);
   }
   else
   printf("erreur");
