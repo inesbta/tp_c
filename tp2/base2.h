@@ -1,9 +1,10 @@
 #include<stdio.h>
 #include<string.h>
 #include <stdlib.h>
+printf("hi");
 struct produit
 {
-  int code[5];
+  int code;
   char desig[31];
   char famille[31];
   float cout_achat;
@@ -31,10 +32,11 @@ PRODUIT * load_produit()
 
   if(fp)
   {
-   while(fgets(s,100,fp))
+    while(fgets(s,100,fp))
     {
+      printf("hello" );
       pp=(PRODUIT*)malloc(sizeof(PRODUIT));
-      sscanf(s,"%4d %30s %30s %10.3f %10lf",pp->code,pp->desig,pp->famille,pp->cout_achat,pp->quantit_stock);
+      sscanf(s,"%4d%30s%30s%10f%10ld",&(pp->code),(pp->desig),(pp->famille),&(pp->cout_achat),&(pp->quantit_stock));
     /*  strncpy(pp->code,s,4);
       strncpy(pp->desig,s+4,30);
       strncpy(pp->famille,s+34,30);
@@ -43,6 +45,7 @@ PRODUIT * load_produit()
       pp->nextp= *firstp;
       *firstp =pp;
       return(*firstp);
+      printf("ines");
     }
   }
   else
@@ -53,7 +56,7 @@ PRODUIT * load_produit()
 }
 
 
- FAMILLE * load_famille()
+/* FAMILLE * load_famille()
 {
  FAMILLE **firstf;FAMILLE * pf; char s1[100];FILE * fp1; FAMILLE * nextf;
   fp1=fopen("famille.txt","r");
@@ -99,7 +102,7 @@ return(c);
 }
 void stock_global(PRODUIT* firstp)
 {
-  PRODUIT * pp; long total; 
+  PRODUIT * pp; long total;
   fn_entet();
   printf("=================ETAT DU STOCK GLOBALE=================");
   printf("code |         designation          |            famille            |cout_achat |qunt_stock |total");
@@ -129,7 +132,7 @@ void stock_famille(PRODUIT * firstp,char fam[30])
   printf("%10ld",pp->quantit_stock);
   total=total+pp->quantit_stock;
   printf("%ld \n",total);
-}  
+}
 void recap_famille(PRODUIT * firstp)
 {
   PRODUIT * pp; float val;
@@ -187,4 +190,4 @@ void supprime_famille(FAMILLE * firstf,char fam[30])
       }
     }
   }
-}
+}*/
