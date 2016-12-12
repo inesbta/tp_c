@@ -14,45 +14,45 @@ typedef struct produit PRODUIT;
 
 struct famille
 {
-  char designation[30];
+  char designation[31];
   struct famille * nextf;
 };
 typedef struct famille FAMILLE;
 
 PRODUIT * load_produit()
 {
-  PRODUIT ** firstp;
+  PRODUIT * firstp;
   PRODUIT * pp;
   FILE * fp;
   char s[100];
   PRODUIT * nextp;
 
+  firstp=NULL;
   fp=fopen("produit.txt","r");
-
   if(fp)
   {
     while(fgets(s,100,fp))
     {
       pp=(PRODUIT*)malloc(sizeof(PRODUIT));
-      sscanf(s,"%4d%30s%30s%10f%10ld",&(pp->code),(pp->desig),(pp->famille),&(pp->cout_achat),&(pp->quantit_stock));
-      pp->nextp= * firstp;
-      *firstp = pp;
+      sscanf(s,"%4d%30s%30s%10f%10ld\n",&(pp->code),(pp->desig),(pp->famille),&(pp->cout_achat),&(pp->quantit_stock));
+      pp->nextp= firstp;
+      firstp = pp;
     }
-      return(*firstp);
   }
   else
 
    printf("erreur");
 
   fclose(fp);
+  return(firstp);
 }
 
 
  FAMILLE * load_famille()
 {
- FAMILLE **firstf;FAMILLE * pf; char s1[100];FILE * fp1; FAMILLE * nextf;
+ FAMILLE *firstf;FAMILLE * pf; char s1[100];FILE * fp1; FAMILLE * nextf;
+  firstf=NULL;
   fp1=fopen("famille.txt","r");
-  printf("hello");
   if(fp1)
   {
     while(fgets(s1,100,fp1))
@@ -60,14 +60,14 @@ PRODUIT * load_produit()
       pf=(FAMILLE*)malloc(sizeof(FAMILLE));
       //strncpy(pf->designation,s1,30);
       sscanf(s1,"%s",pf->designation);
-      pf->nextf=*firstf;
-      *firstf=pf;
+      pf->nextf= firstf;
+      firstf=pf;
     }
-    return(*firstf);
   }
   else
   printf("erreur");
 fclose(fp1);
+return(firstf);
 }
  void fn_entet()
 {
@@ -75,11 +75,10 @@ fclose(fp1);
   fp2=fopen("entet.txt","r");
   if(fp2)
   {
-  while(fgets(s2,200,fp2));
+  while(fgets(s2,200,fp2))
    {
-  strncpy(entet,s2,30);
+   printf("%s",s2);
    }
-  printf("%s",entet);
   }
   else
   printf("erreur");
@@ -97,8 +96,8 @@ void stock_global(PRODUIT* firstp)
 {
   PRODUIT * pp; long total;
   fn_entet();
-  printf("=================ETAT DU STOCK GLOBALE=================");
-  printf("code |         designation          |            famille            |cout_achat |qunt_stock |total");
+  printf("=================ETAT DU STOCK GLOBALE=================\n");
+  printf("code |         designation          |            famille            |cout_achat |qunt_stock |total\n");
   for(pp=firstp,total=0;pp;pp=pp->nextp)
   {
     printf("%5d|",pp->code);
@@ -115,23 +114,25 @@ void stock_famille(PRODUIT * firstp,char fam[30])
    long total=0; PRODUIT * pp;
 
   fn_entet();
-  printf("==================ETAT DU STOCK DE LA FAMILLE %s===================",fam);
-  for(pp=firstp;pp && strcmp(pp->famille,fam);pp->nextp)
-  ;
-  printf("code |          designation          |cout_achat |qunt_stock |total");
-  printf("%5d",pp->code);
-  printf("%30s",pp->desig);
-  printf("%10f",pp->cout_achat);
-  printf("%10ld",pp->quantit_stock);
+  printf("==================ETAT DU STOCK DE LA FAMILLE %s===================\n",fam);
+  for(pp=firstp;pp;pp->nextp){
+  if(!strcmp(pp->famille,fam)){
+  printf("code |          designation          |cout_achat |qunt_stock |total\n");
+  printf("%5d|",pp->code);
+  printf("%30s|",pp->desig);
+  printf("%10f|",pp->cout_achat);
+  printf("%10ld|",pp->quantit_stock);
   total=total+pp->quantit_stock;
   printf("%ld \n",total);
+}
+}
 }
 void recap_famille(PRODUIT * firstp)
 {
   PRODUIT * pp; float val;
   fn_entet();
-  printf("============LE RECAP DES FAMILLES==========");
-  printf("          famille              |valeur stock");
+  printf("============LE RECAP DES FAMILLES==========\n");
+  printf("          famille              |valeur stock\n");
   for(pp=firstp;pp;pp=pp->nextp )
   {
     printf("%30s|",pp->famille);
@@ -144,16 +145,16 @@ void delete_node(PRODUIT * p,PRODUIT * prev )
   prev->nextp = p->nextp;
   free(p);
 }
-void supprime_Pfamille(PRODUIT * firstp,char fam[30])
+void supprime_Pfamille(PRODUIT ** firstp,char fam[30])
 {
   PRODUIT * p;PRODUIT *q; PRODUIT * prev;
-  for(p=firstp;p!=NULL;prev = p,p=p->nextp)
+  for(p=*firstp;p!=NULL;prev = p,p=p->nextp)
   {
     if(strcmp(p->famille,fam)==0)
   {
-    if(p==firstp)
+    if(p==(*firstp))
     {
-      firstp=firstp->nextp;
+      *firstp=(*firstp)->nextp;
       q=p;
       free(q);
     }
@@ -164,16 +165,16 @@ void supprime_Pfamille(PRODUIT * firstp,char fam[30])
   }
  }
 }
-void supprime_famille(FAMILLE * firstf,char fam[30])
+void supprime_famille(FAMILLE ** firstf,char fam[30])
 { FAMILLE *p;FAMILLE *q; FAMILLE * prev;
 
-  for(p=firstf;p!=NULL;prev=p,p=p->nextf)
+  for(p=*firstf;p!=NULL;prev=p,p=p->nextf)
   {
     if(strcmp(p->designation,fam)==0)
     {
-      if(p==firstf)
+      if(p==(*firstf))
       {
-        firstf=firstf->nextf;
+        *firstf=(*firstf)->nextf;
         q=p;
         free(q);
       }
