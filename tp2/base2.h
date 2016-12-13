@@ -97,17 +97,18 @@ void stock_global(PRODUIT* firstp)
   PRODUIT * pp; long total;
   fn_entet();
   printf("=================ETAT DU STOCK GLOBALE=================\n");
-  printf("code |         designation          |            famille            |cout_achat |qunt_stock |total\n");
-  for(pp=firstp,total=0;pp;pp=pp->nextp)
+  printf("code |         designation          |             famille         |cout_achat|qunt_stock|total  \n");
+  for(pp=firstp;pp;pp=pp->nextp)
   {
+    total=0;
     printf("%5d|",pp->code);
     printf("%30s|",pp->desig);
     printf("%30s|",pp->famille);
     printf("%10f|",pp->cout_achat);
     printf("%10ld|",pp->quantit_stock);
-    total = total+pp->quantit_stock;
+    total = total+(pp->quantit_stock);
+    printf("%ld \n",total);
   }
-  printf("%ld\n",total);
 }
 void stock_famille(PRODUIT * firstp,char fam[30])
 {
@@ -117,7 +118,7 @@ void stock_famille(PRODUIT * firstp,char fam[30])
   printf("==================ETAT DU STOCK DE LA FAMILLE %s===================\n",fam);
   for(pp=firstp;pp;pp->nextp){
   if(!strcmp(pp->famille,fam)){
-  printf("code |          designation          |cout_achat |qunt_stock |total\n");
+  printf("code |          designation          |cout_achat |qunt_stock |total \n");
   printf("%5d|",pp->code);
   printf("%30s|",pp->desig);
   printf("%10f|",pp->cout_achat);
@@ -137,7 +138,7 @@ void recap_famille(PRODUIT * firstp)
   {
     printf("%30s|",pp->famille);
     val =(float)  ((pp->cout_achat) * (pp->quantit_stock));
-    printf("%f",val);
+    printf("%f \n",val);
   }
 }
 void delete_node(PRODUIT * p,PRODUIT * prev )
