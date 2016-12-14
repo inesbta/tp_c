@@ -186,3 +186,22 @@ void supprime_famille(FAMILLE ** firstf,char fam[30])
     }
   }
 }
+void sauvegarde_modif(PRODUIT * firstp, FAMILLE * firstf)
+{
+  FILE * fp;
+  FILE * fp1;
+  PRODUIT * pp;
+  FAMILLE * pf;
+  fp = fopen("produit.txt","w");
+  fp1 = fopen("famille.txt","w");
+  for(pp=firstp;pp;pp=pp->nextp)
+  {
+    fprintf(fp,"%4d%30s%30s%10f%ld\n",(pp->code),(pp->desig),(pp->famille),(pp->cout_achat),(pp->quantit_stock));
+  }
+  for(pf=firstf;pf;pf=pf->nextf)
+  {
+    fprintf(fp1,"30%s\n",(pf->designation));
+  }
+  fclose(fp);
+  fclose(fp1);
+}

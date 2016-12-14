@@ -11,7 +11,7 @@ void main()
   first_famille=load_famille();
 
   while( (choix=get_choix()) != '0')
-  { 
+  {
     while(get_choix()!='\n');
     switch (choix)
     {
@@ -31,6 +31,7 @@ void main()
         supprime_famille(&first_famille,fam);
         break;
       }
+      case'5' : sauvegarde_modif(first_produit,first_famille);break;
     }
 
   }
