@@ -116,7 +116,7 @@ void stock_famille(PRODUIT * firstp,char fam[30])
 
   fn_entet();
   printf("==================ETAT DU STOCK DE LA FAMILLE %s===================\n",fam);
-  for(pp=firstp;pp;pp->nextp){
+  for(pp=firstp;pp;pp=pp->nextp){
   if(!strcmp(pp->famille,fam)){
   printf("code |          designation          |cout_achat |qunt_stock |total \n");
   printf("%5d|",pp->code);
