@@ -11,7 +11,8 @@ void main()
   first_famille=load_famille();
 
   while( (choix=get_choix()) != '0')
-  {
+  { 
+    while(get_choix()!='\n');
     switch (choix)
     {
       case '1': stock_global(first_produit);break;
