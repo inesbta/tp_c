@@ -1,7 +1,8 @@
 #include"base2.h"
 
 void main()
-{
+{                                                   //Iben Taarit ines
+                                                    //IF3 B
   PRODUIT * first_produit;
   FAMILLE * first_famille;
   char choix;
@@ -34,7 +35,5 @@ void main()
     }
 
   }
-  free(first_produit);
-  free(first_famille);
-
+  free_PF(&first_produit,&first_famille);
 }

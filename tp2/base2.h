@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
-#include <stdlib.h>
-struct produit
+#include <stdlib.h>                                  //Iben Taarit ines
+struct produit                                       //IF3 B
 {
   int code;
   char desig[31];
@@ -94,37 +94,36 @@ return(c);
 }
 void stock_global(PRODUIT* firstp)
 {
-  PRODUIT * pp; long total;
+  PRODUIT * pp; float total;
   fn_entet();
-  printf("=================ETAT DU STOCK GLOBALE=================\n");
+  printf("=================ETAT DU STOCK GLOBALE=================\n\n");
   printf("code |         designation          |             famille          |cout_achat|qunt_stock|total  \n");
   for(pp=firstp;pp;pp=pp->nextp)
   {
-    total=0;
     printf("%5d|",pp->code);
     printf("%30s|",pp->desig);
     printf("%30s|",pp->famille);
     printf("%10.5f|",pp->cout_achat);
     printf("%10ld|",pp->quantit_stock);
-    total = total+(pp->quantit_stock);
-    printf("%ld \n",total);
+    total = (float)(pp->cout_achat)*(pp->quantit_stock);
+    printf("%lf \n",total);
   }
 }
 void stock_famille(PRODUIT * firstp,char fam[30])
 {
-   long total=0; PRODUIT * pp;
+   float total; PRODUIT * pp;
 
   fn_entet();
-  printf("==================ETAT DU STOCK DE LA FAMILLE %s===================\n",fam);
+  printf("==================ETAT DU STOCK DE LA FAMILLE %s===================\n\n",fam);
+  printf("code |          designation         |cout_achat|qunt_stock|total \n");
   for(pp=firstp;pp;pp=pp->nextp){
   if(!strcmp(pp->famille,fam)){
-  printf("code |          designation          |cout_achat |qunt_stock |total \n");
   printf("%5d|",pp->code);
   printf("%30s|",pp->desig);
-  printf("%10f|",pp->cout_achat);
+  printf("%10.5f|",pp->cout_achat);
   printf("%10ld|",pp->quantit_stock);
-  total=total+pp->quantit_stock;
-  printf("%ld \n",total);
+  total=(float)(pp->cout_achat)*(pp->quantit_stock);
+  printf("%lf \n",total);
 }
 }
 }
@@ -132,8 +131,8 @@ void recap_famille(PRODUIT * firstp)
 {
   PRODUIT * pp; float val;
   fn_entet();
-  printf("============LE RECAP DES FAMILLES==========\n");
-  printf("          famille              |valeur stock\n");
+  printf("============LE RECAP DES FAMILLES==========\n\n");
+  printf("          famille             |valeur stock\n");
   for(pp=firstp;pp;pp=pp->nextp )
   {
     printf("%30s|",pp->famille);
@@ -204,4 +203,19 @@ void sauvegarde_modif(PRODUIT * firstp, FAMILLE * firstf)
   }
   fclose(fp);
   fclose(fp1);
+}
+void free_PF(PRODUIT ** firstp,FAMILLE ** firstf)
+{
+  PRODUIT * pp;
+  FAMILLE * pf;
+  while(pp = *firstp)
+  {
+    *firstp = (*firstp)->nextp;
+    free(pp);
+  }
+  while(pf = *firstf)
+  {
+    *firstf = (*firstf)->nextf;
+    free(pf);
+  }
 }
