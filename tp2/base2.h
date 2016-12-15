@@ -97,14 +97,14 @@ void stock_global(PRODUIT* firstp)
   PRODUIT * pp; long total;
   fn_entet();
   printf("=================ETAT DU STOCK GLOBALE=================\n");
-  printf("code |         designation          |             famille         |cout_achat|qunt_stock|total  \n");
+  printf("code |         designation          |             famille          |cout_achat|qunt_stock|total  \n");
   for(pp=firstp;pp;pp=pp->nextp)
   {
     total=0;
     printf("%5d|",pp->code);
     printf("%30s|",pp->desig);
     printf("%30s|",pp->famille);
-    printf("%10f|",pp->cout_achat);
+    printf("%10.5f|",pp->cout_achat);
     printf("%10ld|",pp->quantit_stock);
     total = total+(pp->quantit_stock);
     printf("%ld \n",total);

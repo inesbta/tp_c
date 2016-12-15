@@ -6,7 +6,7 @@ char* saisie(char* s)
   scanf("%s",s);
   return(s);
 }
-void afficher(char* s)
+void affiche(char* s)
 { int i;
   for(i=0;i<strlen(s);i++)
   putchar(*(s+i));
@@ -46,12 +46,15 @@ void main()
   char* s;
   printf("choisir une alternative parmis les suivantes:saisir=>s,afficher=>a,inverse=>i,mots=>m\n");
   mot=getchar();
-  switch(mot)
+  while(mot!='q')
   {
+  switch(mot)
+   {
     case's':saisie(s);break;
-    case'a':afficher(s);break;
+    case'a':affiche(s);break;
     case'i':inverse(s);break;
     case'm':mots(s);break;
-  }
-  printf("frappez une touche pour revenir au menu");
+   }
+  printf("frappez une touche pour revenir au menu et frapper q pour quitter");
+ }
 }
