@@ -36,6 +36,22 @@ struct compos
 };
 typedef struct compos COMPOS;
 
+struct liste
+{
+  d DATA;
+  liste * nextl;
+};
+typedef struct liste LISTE;
+
+struct fiche
+{
+  int code_compose;
+  int quantite;
+  int prix;
+  long total;
+  struct fiche * nextfi;
+};
+typedef struct fiche FICHE;
 
 ARTICLE * load_article()
 {

@@ -1,12 +1,6 @@
 #include<stdio.h>
 #include"base.h"
 #include<stdlib.h>
-struct liste
-{
-  d DATA;
-  liste * nextl;
-};
-typedef struct liste LISTE;
 
 void insert(LISTE ** firstl,DATA d)
 {
@@ -96,12 +90,15 @@ load_liste_sans_redo(LISTE * firstl)
 }
 void liste_matiere_necessaire(COMPOS * racine,int key_compose)
 {
-first = load_matiere_necessaire(racine,key_compose);
-if(first)
- load_liste_sans_redo(first);
+  LISTE * firstl;
+firstl = load_matiere_necessaire(racine,key_compose);
+if(firstl)
+ {
+ load_liste_sans_redo(firstl);
   printf("les matieres premiers necessaires pour former le composé %d sont \n",key_compose);
   for(p=first;p;p = p->nextl)
   {
     printf("%d du composant %d\n",p->d.quantite,p->d.code_compose);
   }
+ }
 }
