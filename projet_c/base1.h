@@ -1,7 +1,3 @@
-#include<stdio.h>
-#include"base.h"
-#include<stdlib.h>
-
 void insert(LISTE ** firstl,DATA d)
 {
   LISTE * pp;
@@ -73,7 +69,7 @@ void delete_noeud(LISTE ** firstl,LISTE * p)
  free(p);
 }
 
-load_liste_sans_redo(LISTE * firstl)
+void load_liste_sans_redo(LISTE * firstl)
 {
   int s; LISTE * p; LISTE * pp;
   for(p = firstl; p ;p = p->nextl)
@@ -95,7 +91,7 @@ firstl = load_matiere_necessaire(racine,key_compose);
 if(firstl)
  {
  load_liste_sans_redo(firstl);
-  printf("les matieres premiers necessaires pour former le composé %d sont \n",key_compose);
+  printf("Les matieres premiers necessaires pour former le composé %d sont \n",key_compose);
   for(p=first;p;p = p->nextl)
   {
     printf("%d du composant %d\n",p->d.quantite,p->d.code_compose);

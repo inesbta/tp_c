@@ -1,48 +1,55 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include"base.h"
-void insert_fiche(FICHE ** firstfi,int code,int quantite,int prix)
+float cout_total(LISTE * firstl,ARTICLE * firsta)
 {
-  long tot; FICHE * pfi;
-  pfi = (FICHE*)malloc(sizeof(FICHE));
-  pfi->code_compose = code;
-  pfi->quantite = quantite;
-  pfi->prix = prix;
-  tot = prix * quantite;
-  pfi->total = tot;
- pfi->nextfi = *firstfi;
- *firstfi = pfi;
-}
-
-FICHE *load_cout_matier(COMPOS * racine, int key_compose)
-{
-  LISTE * firstl; FICHE * firstfi; LISTE * p;
-  firstl = load_matiere_necessaire(racine,key_compose);
-  if(firstl)
+ float s;
+ s = 0;
+for(pl = firstl;pl;pl = pl->nextl)
+ {
+  for(pa = firsta;pa;pa = pa->nexta)
   {
-    load_liste_sans_redo(firstl);
-    for(p = firstl;p;p = p->nextl)
+    if(pl->d.code_compose == pa->code_ar)
     {
-     for(ar=firsta;ar;ar = ar->nexta)
-     if(p->d.code_compose == ar->code_ar)
-     insert_fiche(&firsfi,ar->code_ar,p->d.quantite,ar->prix_achat)
+    ct =(float)(pl->d.quantite) * (pa->prix_achat);
     }
-  return(firstfi);
   }
-  return(NULL);
+ s += ct;
+ }
+ return(s);
 }
 
-void liste_cout_matiere(COMPOS * racine,int key_compose)
+void insert_cout(FICHE1 ** firstc,float cout,char desg[30])
 {
-firstfi = load_cout_matier(COMPOS * racine, int key_compose)
-if(firstfi)
-{
-  printf("====================la fiche cout matieres premieres du composé %d====================\n" ,key_compose)
-  printf("| copmosant | quantite  |   prix    |   total   |\n")
-  for(pfi = firstfi;pfi;pfi = pfi->nextfi)
-  {
-    printf("%11d|%11d%11d%11ld|\n",pfi->code_compose,pfi->quantite,pfi->prix,pfi->total);
-  }
+  pc = (FICHE1*)malloc(sizeof(FICHE1))
+  pc->cout_tot = cout;
+  pc->desg = desg;
+  pc->nextc = *firstc;
+  *firstc = pc;
 }
-printf("erreur");
+
+FICHE1 * cout_articles_composes(ARTICLE * firsta,COMPOS * racine)
+{
+  ARTICLE * pa; LISTE * firstl; float cout; FICHE1 * firstc;
+  firstc = NULL;
+  for(pa = firsta;pa;pa = pa->nexta)
+  {
+    if (pa->type == F)
+    {
+      firstl = load_matiere_necessaire(racine,pa->code_ar);
+      load_liste_sans_redo(firstl);
+    }
+    cout = cout_total(firstl,firsta);
+    insert_cout(&firstc,cout,pa->desg);
+  }
+  return(firstc);
+}
+
+void liste_cout_total(ARTICLE * firsta,COMPOS * racine)
+{
+  FICHE1 * firstc; FICHE1 * pc;
+firstc = cout_articles_composes(firsta,racine);
+printf("====================La fiche cout matieres premieres de tout les composes====================");
+printf("|         Designation          |             Cout             |\n");
+for(pc = firstc;pc; pc = pa->nextc)
+ {
+  printf("|%30s|%30f|\n"pc->desg,pc->cout_tot);
+ }
 }
